@@ -1,36 +1,43 @@
 <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-    <div ng-controller="SidenavCtrl as vm" ng-cloak>
+    <div ng-controller="SidenavCtrl as sidenav" ng-cloak>
         <md-toolbar class="md-tall md-hue-2">
             <div layout="column" class="md-toolbar-tools-bottom inset">
                 <div layout="row">
                     <div flex="80" style="margin-top: 10px;">
-                        <div>SWDN P3</div>
+                        <div><ng-md-icon icon="search"></ng-md-icon> Filter results</div>
                     </div>
                 </div>
             </div>
         </md-toolbar>
-        <md-list>
-            <md-list-item ui-sref="home.dashboard">
-                <div class="inset">
-                    <ng-md-icon icon="apps"></ng-md-icon>
-                </div>
-                <p> Dashboard </p>
-            </md-list-item>
-            <md-list-item ng-repeat="item in vm.menu" ng-click="vm.navigateTo('home.' + item.link)">
-                <div class="inset" ng-show="item.icon">
-                    <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
-                </div>
-                <p > {{ item.name }}</p>
-            </md-list-item>
-            <md-divider></md-divider>
-            <md-subheader>Admin</md-subheader>
-            <md-list-item ng-repeat="item in vm.admin" ng-click="vm.showSettingsBottom($event)" >
-                <div class="inset">
-                    <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
-                </div>
-                <p> {{ item.title }}</p>
-            </md-list-item>
-        </md-list>
+
+        <form name="colorForm" class="md-padding" ng-submit="sidenav.filterRestaurants()">
+            <md-input-container class="md-block">
+                <label>Local name</label>
+                <input name="name" ng-model="sidenav.filter.name">
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Address</label>
+                <input name="address" ng-model="sidenav.filter.address">
+            </md-input-container>
+
+            <md-checkbox ng-model="sidenav.filter.open">
+                Open now
+            </md-checkbox>
+
+            <md-autocomplete
+                md-input-name="type"
+                md-selected-item="sidenav.filter.type"
+                md-search-text="sidenav.searchText"
+                md-items="type in sidenav.queryTypes(sidenav.searchText)"
+                md-item-text="type"
+                md-floating-label="Type of restaurant">
+                <span md-highlight-text="sidenav.searchText">{{type}}</span>
+            </md-autocomplete>
+
+            <md-button type="submit" class="md-primary md-raised" aria-label="Filter">Filter</md-button>
+            <md-button aria-label="Cancel" ng-click="sidenav.clearForm()">Clear</md-button>
+        </form>
     </div>
 </md-sidenav>
 
@@ -39,6 +46,9 @@
         <div class="md-toolbar-tools">
             <md-button ng-click="layout.toggleSidenav('left')" hide-gt-md aria-label="Menu">
                 <ng-md-icon icon="search"></ng-md-icon>
+            </md-button>
+            <md-button ng-if="!layout.inDashboard()" ui-sref="home.dashboard" aria-label="Back">
+                <ng-md-icon icon="arrow_back"></ng-md-icon>
             </md-button>
             <h3>Restaurant Reviewer</h3>
         </div>

@@ -5,16 +5,19 @@
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">{{ res.name }}</span>
-            <small>{{ res.type }}</small>
+            <small>{{ res.type.join(', ') }}</small>
           </md-card-title-text>
         </md-card-title>
         <md-card-content>
             <p>
                 <strong>{{ res.address }}</strong>
                 <br>
-                <span>{{ res.hours }}</span>
+                <span>{{ res.hours.text }}</span>
             </p>
         </md-card-content>
+        <md-card-actions layout="column" layout-align="start">
+          <md-button class="md-raised" ui-sref="home.detail({ id: res.id })">View</md-button>
+        </md-card-actions>
     </md-card>
 
 </md-content>

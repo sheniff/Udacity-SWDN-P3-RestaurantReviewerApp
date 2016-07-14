@@ -1,0 +1,80 @@
+<md-content layout="row" layout-wrap style="background-color:#DCDCDC">
+    <div flex-md flex-gt-md="50" layout="column">
+        <md-card>
+            <div style="height: 200px;overflow: hidden">
+                <img style="transform: translateY(-220px)" ng-src="{{ vm.restaurant.picture }}" alt="{{ vm.restaurant.name }} photo" class="md-card-image">
+            </div>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">{{ vm.restaurant.name }}</span>
+                <small>{{ vm.restaurant.type.join(', ') }}</small>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p>
+                    <strong>{{ vm.restaurant.address }}</strong>
+                    <br>
+                    <span>{{ vm.restaurant.hours.text }}</span>
+                </p>
+            </md-card-content>
+        </md-card>
+
+        <md-card>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Leave a review
+                <br>
+                <small>for {{ vm.restaurant.name }}</small></span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+
+                <form name="colorForm" ng-submit="vm.filterRestaurants()">
+                    <!-- ToDo: Reescribir este componente para escoger estrellitas :P (un selector sería lo mas facil) -->
+                    <md-input-container class="md-block">
+                        <label>Rating</label>
+                        <input name="name" ng-model="vm.newReview.rating">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Comment</label>
+                        <textarea name="comment" ng-model="vm.newReview.comment"></textarea>
+                    </md-input-container>
+
+                    <md-button type="submit" class="md-primary md-raised" aria-label="Filter">Send</md-button>
+                    <md-button aria-label="Cancel" ng-click="vm.clearForm()">Clear</md-button>
+                </form>
+
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <div flex-md flex-gt-md="50" layout="column">
+        <md-card flex>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Reviews</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <md-list flex>
+                    <md-list-item class="md-3-line" ng-repeat="review in vm.restaurant.reviews" ng-click="null">
+                        <div class="md-list-item-text" layout="column" style="padding-top: 10px; padding-bottom: 10px;">
+                            <div layout="row">
+                                <img ng-src="{{review.avatar}}" class="md-avatar" alt="{{review.reviewer}}" />
+                                <div layout="column">
+                                    <h3>{{ review.reviewer }}</h3>
+                                    <h4><ng-md-icon ng-repeat="a in vm.getNumber(review.rating) track by $index" icon="star"></ng-md-icon>
+                                    <small>{{ review.timestamp | date }}</small></h4>
+                                </div>
+                            </div>
+                            <p>{{ review.comment }}</p>
+                        </div>
+                        <md-divider ng-if="!$last"></md-divider>
+                    </md-list-item>
+                </md-list>
+            </md-card-content>
+        </md-card>
+    </div>
+</md-content>
+

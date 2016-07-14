@@ -93,6 +93,9 @@
 			$mdOpenMenu(ev);
 		};
 
+		vm.inDashboard = function() {
+			return $state.current.name === 'home.dashboard';
+		};
 	}
 
 })();
