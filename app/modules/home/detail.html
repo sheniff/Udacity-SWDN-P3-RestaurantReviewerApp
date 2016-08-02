@@ -2,11 +2,11 @@
     <div flex-md flex-gt-md="50" layout="column">
         <md-card>
             <div style="height: 200px;overflow: hidden">
-                <img style="transform: translateY(-220px)" ng-src="{{ vm.restaurant.picture }}" alt="{{ vm.restaurant.name }} photo" class="md-card-image">
+                <img style="transform: translateY(-220px)" ng-src="{{ vm.restaurant.picture }}" alt="{{ vm.restaurant.name }}" class="md-card-image">
             </div>
             <md-card-title>
               <md-card-title-text>
-                <span class="md-headline">{{ vm.restaurant.name }}</span>
+                <h2 class="md-headline">{{ vm.restaurant.name }}</h2>
                 <small>{{ vm.restaurant.type.join(', ') }}</small>
               </md-card-title-text>
             </md-card-title>
@@ -22,9 +22,9 @@
         <md-card>
             <md-card-title>
               <md-card-title-text>
-                <span class="md-headline">Leave a review
+                <h2 class="md-headline">Leave a review
                 <br>
-                <small>for {{ vm.restaurant.name }}</small></span>
+                <small>for {{ vm.restaurant.name }}</small></h2>
               </md-card-title-text>
             </md-card-title>
             <md-card-content>
@@ -61,18 +61,21 @@
         <md-card flex>
             <md-card-title>
               <md-card-title-text>
-                <span class="md-headline">Reviews</span>
+                <h2 class="md-headline">Reviews</h2>
               </md-card-title-text>
             </md-card-title>
             <md-card-content>
                 <md-list flex>
-                    <md-list-item class="md-3-line" ng-repeat="review in vm.restaurant.reviews" ng-click="null">
+                    <md-list-item class="md-3-line" ng-repeat="review in vm.restaurant.reviews">
                         <div class="md-list-item-text" layout="column" style="padding-top: 10px; padding-bottom: 10px;">
                             <div layout="row">
-                                <img ng-src="{{review.avatar}}" class="md-avatar" alt="{{review.reviewer}}" />
+                                <img ng-src="{{review.avatar}}" class="md-avatar" alt="{{review.reviewer}} avatar" />
                                 <div layout="column">
                                     <h3>{{ review.reviewer }}</h3>
-                                    <h4><ng-md-icon ng-repeat="a in vm.getNumber(review.rating) track by $index" icon="star"></ng-md-icon>
+                                    <h4>
+                                    <span aria-label="Rating" aria-value="{{review.rating}}">
+                                        <ng-md-icon ng-repeat="a in vm.getNumber(review.rating) track by $index" icon="star"></ng-md-icon>
+                                    </span>
                                     <small>{{ review.timestamp | date }}</small></h4>
                                 </div>
                             </div>
