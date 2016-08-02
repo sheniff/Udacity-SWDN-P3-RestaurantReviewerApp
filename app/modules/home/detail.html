@@ -29,19 +29,27 @@
             </md-card-title>
             <md-card-content>
 
-                <form name="colorForm" ng-submit="vm.filterRestaurants()">
+                <form name="reviewForm" ng-submit="vm.saveReview(vm.newReview.rating, vm.newReview.comment)" novalidate>
                     <!-- ToDo: Reescribir este componente para escoger estrellitas :P (un selector sería lo mas facil) -->
                     <md-input-container class="md-block">
                         <label>Rating</label>
-                        <input name="name" ng-model="vm.newReview.rating">
+                        <input type="number" max="5" min="1" name="rating" id="rating" ng-model="vm.newReview.rating">
+                        <div ng-messages="reviewForm.rating.$error">
+                          <div ng-message="required">Rating is required.</div>
+                          <div ng-message="max">The maximum rating is 5 stars.</div>
+                          <div ng-message="min">The minimum rating is 1 star.</div>
+                        </div>
                     </md-input-container>
 
                     <md-input-container class="md-block">
                         <label>Comment</label>
-                        <textarea name="comment" ng-model="vm.newReview.comment"></textarea>
+                        <textarea name="comment" id="comment" ng-model="vm.newReview.comment" required></textarea>
+                        <div ng-messages="reviewForm.comment.$error">
+                          <div ng-message="required">Comment is required.</div>
+                        </div>
                     </md-input-container>
 
-                    <md-button type="submit" class="md-primary md-raised" aria-label="Filter">Send</md-button>
+                    <md-button type="submit" class="md-primary md-raised" aria-label="Send" ng-disabled="reviewForm.$invalid">Send</md-button>
                     <md-button aria-label="Cancel" ng-click="vm.clearForm()">Clear</md-button>
                 </form>
 
