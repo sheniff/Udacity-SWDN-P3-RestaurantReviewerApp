@@ -53,9 +53,19 @@ module.exports = function (grunt) {
 			build: {
 				src: [
 					// Angular Project Dependencies,
-					'app/assets/libs/angular/angular.js',
-					'app/assets/libs/**/*.js'
-
+					'src/bower_components/es5-shim/es5-shim.js',
+					'src/bower_components/json3/lib/json3.min.js',
+					'src/bower_components/angular/angular.js',
+					'src/bower_components/angular-resource/angular-resource.js',
+					'src/bower_components/angular-aria/angular-aria.js',
+					'src/bower_components/angular-mocks/angular-mocks.js',
+					'src/bower_components/angular-cookies/angular-cookies.js',
+					'src/bower_components/angular-animate/angular-animate.js',
+					'src/bower_components/angular-sanitize/angular-sanitize.js',
+					'src/bower_components/angular-ui-router/release/angular-ui-router.js',
+					'src/bower_components/angular-messages/angular-messages.js',
+					'src/bower_components/angular-material-icons/angular-material-icons.min.js',
+					'src/bower_components/angular-material/angular-material.js',
 				],
 				dest: 'app/assets/js/<%= pkg.name %>-angularbundle.js'
 			}
