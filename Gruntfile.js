@@ -68,6 +68,13 @@ module.exports = function (grunt) {
 					'src/bower_components/angular-material/angular-material.js',
 				],
 				dest: 'app/assets/js/<%= pkg.name %>-angularbundle.js'
+			},
+			buildcss: {
+				src: [
+					'src/bower_components/angular-material-icons/angular-material-icons.css',
+					'src/bower_components/angular-material/angular-material.css'
+				],
+				dest: 'app/assets/css/<%= pkg.name %>-bundle.css'
 			}
 		},
 
@@ -120,7 +127,9 @@ module.exports = function (grunt) {
 		},
 
 		injector: {
-			options: {},
+			options: {
+				addRootSlash: false
+			},
 			dev: {
 				files: {
 					'index.html': [
