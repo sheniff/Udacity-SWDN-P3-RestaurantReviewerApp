@@ -35,9 +35,9 @@
                         <label>Rating</label>
                         <input type="number" max="5" min="1" name="rating" id="rating" ng-model="vm.newReview.rating">
                         <div ng-messages="reviewForm.rating.$error">
-                          <div ng-message="required">Rating is required.</div>
-                          <div ng-message="max">The maximum rating is 5 stars.</div>
-                          <div ng-message="min">The minimum rating is 1 star.</div>
+                          <p ng-message="required">Rating is required.</p>
+                          <p ng-message="max">The maximum rating is 5 stars.</p>
+                          <p ng-message="min">The minimum rating is 1 star.</p>
                         </div>
                     </md-input-container>
 
@@ -88,4 +88,3 @@
         </md-card>
     </div>
 </md-content>
-
