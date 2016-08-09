@@ -79,7 +79,7 @@
                                 <div layout="column">
                                     <h3>{{ review.reviewer }}</h3>
                                     <h4>
-                                    <span aria-label="Rating" aria-value="{{review.rating}}">
+                                    <span aria-label="Rating">
                                         <ng-md-icon ng-repeat="a in vm.getNumber(review.rating) track by $index" icon="star"></ng-md-icon>
                                     </span>
                                     <small>{{ review.timestamp | date }}</small></h4>
