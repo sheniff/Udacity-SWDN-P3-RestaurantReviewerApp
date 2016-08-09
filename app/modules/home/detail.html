@@ -30,6 +30,14 @@
             <md-card-content>
 
                 <form name="reviewForm" ng-submit="vm.saveReview(vm.newReview.rating, vm.newReview.comment)" novalidate>
+                    <md-input-container class="md-block" md-is-error="vm.reviewForm.$submitted && vm.reviewForm.name.$invalid">
+                        <label>Name (required)</label>
+                        <input type="text" name="name" id="name" ng-model="vm.newReview.name" required/>
+                        <div ng-messages="vm.reviewForm.name.$error" ng-if="vm.reviewForm.$submitted && vm.reviewForm.name.$invalid">
+                          <p ng-message="required">Name is required.</p>
+                        </div>
+                    </md-input-container>
+
                     <!-- ToDo: Reescribir este componente para escoger estrellitas :P (un selector sería lo mas facil) -->
                     <md-input-container class="md-block">
                         <label>Rating</label>

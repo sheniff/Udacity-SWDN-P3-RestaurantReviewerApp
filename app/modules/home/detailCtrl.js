@@ -34,7 +34,7 @@
 		vm.saveReview = function(rating, comment) {
 			vm.restaurant.reviews.splice(0, 0, {
 				restaurantId: vm.restaurant.id,
-				reviewer: 'Snoopy',
+				reviewer: vm.newReview.name,
 				avatar: 'http://www.emoticonswallpapers.com/avatar/comics/Woodstock--Snoopy.jpg',
 				timestamp: new Date().getTime(),
 				rating: angular.copy(rating),
@@ -48,6 +48,7 @@
 
 		vm.clearForm = function() {
 			vm.newReview.rating = 3;
+			vm.newReview.name = '';
 			vm.newReview.comment = '';
 		};
 
