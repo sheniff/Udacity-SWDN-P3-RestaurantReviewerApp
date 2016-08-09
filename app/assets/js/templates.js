@@ -8,7 +8,7 @@ angular.module('restaurant-reviewer').run(['$templateCache', function($templateC
     "        <img ng-src=\"{{ res.picture }}\" alt=\"{{ res.name }}\" class=\"md-card-image\">\n" +
     "        <md-card-title>\n" +
     "          <md-card-title-text>\n" +
-    "            <span class=\"md-headline\">{{ res.name }}</span>\n" +
+    "            <h2 class=\"md-headline\">{{ res.name }}</h2>\n" +
     "            <small>{{ res.type.join(', ') }}</small>\n" +
     "          </md-card-title-text>\n" +
     "        </md-card-title>\n" +
@@ -58,11 +58,13 @@ angular.module('restaurant-reviewer').run(['$templateCache', function($templateC
     "            </md-card-title>\n" +
     "            <md-card-content>\n" +
     "\n" +
-    "                <form name=\"reviewForm\" ng-submit=\"vm.saveReview(vm.newReview.rating, vm.newReview.comment)\" novalidate>\n" +
-    "                    <md-input-container class=\"md-block\" md-is-error=\"vm.reviewForm.$submitted && vm.reviewForm.name.$invalid\">\n" +
+    "                <form name=\"reviewForm\"\n" +
+    "                  ng-submit=\"vm.saveReview(vm.newReview.rating, vm.newReview.comment);reviewForm.$setUntouched()\"\n" +
+    "                  novalidate>\n" +
+    "                    <md-input-container class=\"md-block\" md-is-error=\"reviewForm.name.$touched && reviewForm.name.$invalid\">\n" +
     "                        <label>Name (required)</label>\n" +
     "                        <input type=\"text\" name=\"name\" id=\"name\" ng-model=\"vm.newReview.name\" required/>\n" +
-    "                        <div ng-messages=\"vm.reviewForm.name.$error\" ng-if=\"vm.reviewForm.$submitted && vm.reviewForm.name.$invalid\">\n" +
+    "                        <div ng-messages=\"reviewForm.name.$error\" ng-if=\"reviewForm.name.$touched && reviewForm.name.$invalid\">\n" +
     "                          <p ng-message=\"required\">Name is required.</p>\n" +
     "                        </div>\n" +
     "                    </md-input-container>\n" +
@@ -70,24 +72,24 @@ angular.module('restaurant-reviewer').run(['$templateCache', function($templateC
     "                    <!-- ToDo: Reescribir este componente para escoger estrellitas :P (un selector sería lo mas facil) -->\n" +
     "                    <md-input-container class=\"md-block\">\n" +
     "                        <label>Rating</label>\n" +
-    "                        <input type=\"number\" max=\"5\" min=\"1\" name=\"rating\" id=\"rating\" ng-model=\"vm.newReview.rating\">\n" +
-    "                        <div ng-messages=\"vm.reviewForm.rating.$error\">\n" +
+    "                        <input type=\"number\" max=\"5\" min=\"1\" name=\"rating\" id=\"rating\" ng-model=\"vm.newReview.rating\" required>\n" +
+    "                        <div ng-messages=\"reviewForm.rating.$error\">\n" +
     "                          <p ng-message=\"required\">Rating is required.</p>\n" +
     "                          <p ng-message=\"max\">The maximum rating is 5 stars.</p>\n" +
     "                          <p ng-message=\"min\">The minimum rating is 1 star.</p>\n" +
     "                        </div>\n" +
     "                    </md-input-container>\n" +
     "\n" +
-    "                    <md-input-container class=\"md-block\" md-is-error=\"vm.reviewForm.$submitted && vm.reviewForm.comment.$invalid\">\n" +
+    "                    <md-input-container class=\"md-block\" md-is-error=\"reviewForm.comment.$touched && reviewForm.comment.$invalid\">\n" +
     "                        <label>Comment (required)</label>\n" +
     "                        <textarea name=\"comment\" id=\"comment\" ng-model=\"vm.newReview.comment\" required></textarea>\n" +
-    "                        <div ng-messages=\"vm.reviewForm.comment.$error\" ng-if=\"vm.reviewForm.$submitted && vm.reviewForm.comment.$invalid\">\n" +
+    "                        <div ng-messages=\"reviewForm.comment.$error\" ng-if=\"reviewForm.comment.$touched && reviewForm.comment.$invalid\">\n" +
     "                          <p ng-message=\"required\">Comment is required.</p>\n" +
     "                        </div>\n" +
     "                    </md-input-container>\n" +
     "\n" +
     "                    <md-button type=\"submit\" class=\"md-primary md-raised\" aria-label=\"Send\" ng-disabled=\"reviewForm.$invalid\">Send</md-button>\n" +
-    "                    <md-button aria-label=\"Cancel\" ng-click=\"vm.clearForm()\">Clear</md-button>\n" +
+    "                    <md-button aria-label=\"Cancel\" ng-click=\"vm.clearForm();reviewForm.$setUntouched()\">Clear</md-button>\n" +
     "                </form>\n" +
     "\n" +
     "            </md-card-content>\n" +
@@ -110,7 +112,7 @@ angular.module('restaurant-reviewer').run(['$templateCache', function($templateC
     "                                <div layout=\"column\">\n" +
     "                                    <h3>{{ review.reviewer }}</h3>\n" +
     "                                    <h4>\n" +
-    "                                    <span aria-label=\"Rating\">\n" +
+    "                                    <span aria-label=\"{{review.rating}} out of 5 star rating\">\n" +
     "                                        <ng-md-icon ng-repeat=\"a in vm.getNumber(review.rating) track by $index\" icon=\"star\"></ng-md-icon>\n" +
     "                                    </span>\n" +
     "                                    <small>{{ review.timestamp | date }}</small></h4>\n" +

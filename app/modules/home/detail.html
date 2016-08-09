@@ -27,11 +27,13 @@
             </md-card-title>
             <md-card-content>
 
-                <form name="reviewForm" ng-submit="vm.saveReview(vm.newReview.rating, vm.newReview.comment)" novalidate>
-                    <md-input-container class="md-block" md-is-error="vm.reviewForm.$submitted && vm.reviewForm.name.$invalid">
+                <form name="reviewForm"
+                  ng-submit="vm.saveReview(vm.newReview.rating, vm.newReview.comment);reviewForm.$setUntouched()"
+                  novalidate>
+                    <md-input-container class="md-block" md-is-error="reviewForm.name.$touched && reviewForm.name.$invalid">
                         <label>Name (required)</label>
                         <input type="text" name="name" id="name" ng-model="vm.newReview.name" required/>
-                        <div ng-messages="vm.reviewForm.name.$error" ng-if="vm.reviewForm.$submitted && vm.reviewForm.name.$invalid">
+                        <div ng-messages="reviewForm.name.$error" ng-if="reviewForm.name.$touched && reviewForm.name.$invalid">
                           <p ng-message="required">Name is required.</p>
                         </div>
                     </md-input-container>
@@ -39,24 +41,24 @@
                     <!-- ToDo: Reescribir este componente para escoger estrellitas :P (un selector sería lo mas facil) -->
                     <md-input-container class="md-block">
                         <label>Rating</label>
-                        <input type="number" max="5" min="1" name="rating" id="rating" ng-model="vm.newReview.rating">
-                        <div ng-messages="vm.reviewForm.rating.$error">
+                        <input type="number" max="5" min="1" name="rating" id="rating" ng-model="vm.newReview.rating" required>
+                        <div ng-messages="reviewForm.rating.$error">
                           <p ng-message="required">Rating is required.</p>
                           <p ng-message="max">The maximum rating is 5 stars.</p>
                           <p ng-message="min">The minimum rating is 1 star.</p>
                         </div>
                     </md-input-container>
 
-                    <md-input-container class="md-block" md-is-error="vm.reviewForm.$submitted && vm.reviewForm.comment.$invalid">
+                    <md-input-container class="md-block" md-is-error="reviewForm.comment.$touched && reviewForm.comment.$invalid">
                         <label>Comment (required)</label>
                         <textarea name="comment" id="comment" ng-model="vm.newReview.comment" required></textarea>
-                        <div ng-messages="vm.reviewForm.comment.$error" ng-if="vm.reviewForm.$submitted && vm.reviewForm.comment.$invalid">
+                        <div ng-messages="reviewForm.comment.$error" ng-if="reviewForm.comment.$touched && reviewForm.comment.$invalid">
                           <p ng-message="required">Comment is required.</p>
                         </div>
                     </md-input-container>
 
                     <md-button type="submit" class="md-primary md-raised" aria-label="Send" ng-disabled="reviewForm.$invalid">Send</md-button>
-                    <md-button aria-label="Cancel" ng-click="vm.clearForm()">Clear</md-button>
+                    <md-button aria-label="Cancel" ng-click="vm.clearForm();reviewForm.$setUntouched()">Clear</md-button>
                 </form>
 
             </md-card-content>
@@ -79,7 +81,7 @@
                                 <div layout="column">
                                     <h3>{{ review.reviewer }}</h3>
                                     <h4>
-                                    <span aria-label="Rating">
+                                    <span aria-label="{{review.rating}} out of 5 star rating">
                                         <ng-md-icon ng-repeat="a in vm.getNumber(review.rating) track by $index" icon="star"></ng-md-icon>
                                     </span>
                                     <small>{{ review.timestamp | date }}</small></h4>
