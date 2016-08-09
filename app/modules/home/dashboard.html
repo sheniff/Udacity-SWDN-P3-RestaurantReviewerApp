@@ -1,6 +1,6 @@
 <md-content layout="row" layout-wrap style="background-color:#DCDCDC">
 
-    <md-card ng-repeat="res in vm.restaurants" flex-xs flex-gt-xs="30">
+    <md-card ng-repeat="res in vm.restaurants" flex="100" flex-gt-xs="45" flex-gt-sm="30">
         <img ng-src="{{ res.picture }}" alt="{{ res.name }}" class="md-card-image">
         <md-card-title>
           <md-card-title-text>
@@ -21,4 +21,3 @@
     </md-card>
 
 </md-content>
-

@@ -4,7 +4,7 @@ angular.module('restaurant-reviewer').run(['$templateCache', function($templateC
   $templateCache.put('app/modules/home/dashboard.html',
     "<md-content layout=\"row\" layout-wrap style=\"background-color:#DCDCDC\">\n" +
     "\n" +
-    "    <md-card ng-repeat=\"res in vm.restaurants\" flex-xs flex-gt-xs=\"30\">\n" +
+    "    <md-card ng-repeat=\"res in vm.restaurants\" flex=\"100\" flex-gt-xs=\"45\" flex-gt-sm=\"30\">\n" +
     "        <img ng-src=\"{{ res.picture }}\" alt=\"{{ res.name }}\" class=\"md-card-image\">\n" +
     "        <md-card-title>\n" +
     "          <md-card-title-text>\n" +
@@ -24,14 +24,13 @@ angular.module('restaurant-reviewer').run(['$templateCache', function($templateC
     "        </md-card-actions>\n" +
     "    </md-card>\n" +
     "\n" +
-    "</md-content>\n" +
-    "\n"
+    "</md-content>\n"
   );
 
 
   $templateCache.put('app/modules/home/detail.html',
     "<md-content layout=\"row\" layout-wrap style=\"background-color:#DCDCDC\">\n" +
-    "    <div flex-md flex-gt-md=\"50\" layout=\"column\">\n" +
+    "    <div flex=\"100\" flex-gt-xs=\"45\" layout=\"column\">\n" +
     "        <md-card>\n" +
     "            <div style=\"height: 200px;overflow: hidden\">\n" +
     "                <img style=\"transform: translateY(-220px)\" ng-src=\"{{ vm.restaurant.picture }}\" alt=\"{{ vm.restaurant.name }}\" class=\"md-card-image\">\n" +
@@ -89,7 +88,7 @@ angular.module('restaurant-reviewer').run(['$templateCache', function($templateC
     "        </md-card>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div flex-md flex-gt-md=\"50\" layout=\"column\">\n" +
+    "    <div flex=\"100\" flex-gt-xs=\"50\" layout=\"column\">\n" +
     "        <md-card flex>\n" +
     "            <md-card-title>\n" +
     "              <md-card-title-text>\n" +
