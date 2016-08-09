@@ -34,18 +34,18 @@
                     <md-input-container class="md-block">
                         <label>Rating</label>
                         <input type="number" max="5" min="1" name="rating" id="rating" ng-model="vm.newReview.rating">
-                        <div ng-messages="reviewForm.rating.$error">
+                        <div ng-messages="vm.reviewForm.rating.$error">
                           <p ng-message="required">Rating is required.</p>
                           <p ng-message="max">The maximum rating is 5 stars.</p>
                           <p ng-message="min">The minimum rating is 1 star.</p>
                         </div>
                     </md-input-container>
 
-                    <md-input-container class="md-block">
-                        <label>Comment</label>
+                    <md-input-container class="md-block" md-is-error="vm.reviewForm.$submitted && vm.reviewForm.comment.$invalid">
+                        <label>Comment (required)</label>
                         <textarea name="comment" id="comment" ng-model="vm.newReview.comment" required></textarea>
-                        <div ng-messages="reviewForm.comment.$error">
-                          <div ng-message="required">Comment is required.</div>
+                        <div ng-messages="vm.reviewForm.comment.$error" ng-if="vm.reviewForm.$submitted && vm.reviewForm.comment.$invalid">
+                          <p ng-message="required">Comment is required.</p>
                         </div>
                     </md-input-container>
 
@@ -61,7 +61,7 @@
         <md-card flex>
             <md-card-title>
               <md-card-title-text>
-                <h2 class="md-headline">Reviews</h2>
+                <h2 class="md-headline reviews-title" tabindex="-1">Reviews</h2>
               </md-card-title-text>
             </md-card-title>
             <md-card-content>

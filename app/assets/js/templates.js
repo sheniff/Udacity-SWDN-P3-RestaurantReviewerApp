@@ -66,18 +66,18 @@ angular.module('restaurant-reviewer').run(['$templateCache', function($templateC
     "                    <md-input-container class=\"md-block\">\n" +
     "                        <label>Rating</label>\n" +
     "                        <input type=\"number\" max=\"5\" min=\"1\" name=\"rating\" id=\"rating\" ng-model=\"vm.newReview.rating\">\n" +
-    "                        <div ng-messages=\"reviewForm.rating.$error\">\n" +
-    "                          <div ng-message=\"required\">Rating is required.</div>\n" +
-    "                          <div ng-message=\"max\">The maximum rating is 5 stars.</div>\n" +
-    "                          <div ng-message=\"min\">The minimum rating is 1 star.</div>\n" +
+    "                        <div ng-messages=\"vm.reviewForm.rating.$error\">\n" +
+    "                          <p ng-message=\"required\">Rating is required.</p>\n" +
+    "                          <p ng-message=\"max\">The maximum rating is 5 stars.</p>\n" +
+    "                          <p ng-message=\"min\">The minimum rating is 1 star.</p>\n" +
     "                        </div>\n" +
     "                    </md-input-container>\n" +
     "\n" +
-    "                    <md-input-container class=\"md-block\">\n" +
-    "                        <label>Comment</label>\n" +
+    "                    <md-input-container class=\"md-block\" md-is-error=\"vm.reviewForm.$submitted && vm.reviewForm.comment.$invalid\">\n" +
+    "                        <label>Comment (required)</label>\n" +
     "                        <textarea name=\"comment\" id=\"comment\" ng-model=\"vm.newReview.comment\" required></textarea>\n" +
-    "                        <div ng-messages=\"reviewForm.comment.$error\">\n" +
-    "                          <div ng-message=\"required\">Comment is required.</div>\n" +
+    "                        <div ng-messages=\"vm.reviewForm.comment.$error\" ng-if=\"vm.reviewForm.$submitted && vm.reviewForm.comment.$invalid\">\n" +
+    "                          <p ng-message=\"required\">Comment is required.</p>\n" +
     "                        </div>\n" +
     "                    </md-input-container>\n" +
     "\n" +
@@ -93,7 +93,7 @@ angular.module('restaurant-reviewer').run(['$templateCache', function($templateC
     "        <md-card flex>\n" +
     "            <md-card-title>\n" +
     "              <md-card-title-text>\n" +
-    "                <h2 class=\"md-headline\">Reviews</h2>\n" +
+    "                <h2 class=\"md-headline reviews-title\" tabindex=\"-1\">Reviews</h2>\n" +
     "              </md-card-title-text>\n" +
     "            </md-card-title>\n" +
     "            <md-card-content>\n" +
@@ -119,8 +119,7 @@ angular.module('restaurant-reviewer').run(['$templateCache', function($templateC
     "            </md-card-content>\n" +
     "        </md-card>\n" +
     "    </div>\n" +
-    "</md-content>\n" +
-    "\n"
+    "</md-content>\n"
   );
 
 

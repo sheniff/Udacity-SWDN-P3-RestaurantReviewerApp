@@ -25,6 +25,7 @@
 		/*jshint validthis: true */
 		var vm = this;
 		vm.restaurant = homeService.getRestaurant($state.params.id);
+		vm.newReview = {};
 
 		vm.getNumber = function(num) {
 			return new Array(num);
@@ -41,13 +42,13 @@
 			});
 
 			vm.clearForm();
+			// focus on list of reviews to help screen reader to focus atention in what matters next
+			document.querySelector('h2.reviews-title').focus();
 		};
 
 		vm.clearForm = function() {
-			vm.newReview = {
-				rating: 3,
-				comment: ''
-			};
+			vm.newReview.rating = 3;
+			vm.newReview.comment = '';
 		};
 
 		// init

@@ -1,5 +1,5 @@
 /*!
-* restaurant-reviewer - v0.0.1 - MIT LICENSE 2016-08-04. 
+* restaurant-reviewer - v0.0.1 - MIT LICENSE 2016-08-08. 
 * @author Sheniff
 */
 (function() {
@@ -43,8 +43,7 @@
 
 	angular
 		.module('restaurant-reviewer')
-		.config(configure)
-		.run(runBlock);
+		.config(configure);
 
 	configure.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
 
@@ -54,23 +53,9 @@
 
 		// This is required for Browser Sync to work poperly
 		$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-		
-			$urlRouterProvider
-			.otherwise('/dashboard');
-			
-			}
-
-			runBlock.$inject = ['$rootScope'];
-
-			function runBlock($rootScope) {
-				'use strict';
-
-				console.log('AngularJS run() function...');
-			}
-
-
-		})();
+		$urlRouterProvider.otherwise('/dashboard');
+	}
+})();
 
 (function() {
 	'use strict';
@@ -147,6 +132,7 @@ angular.module('restaurant-reviewer')
 		/*jshint validthis: true */
 		var vm = this;
 		vm.restaurant = homeService.getRestaurant($state.params.id);
+		vm.newReview = {};
 
 		vm.getNumber = function(num) {
 			return new Array(num);
@@ -163,13 +149,13 @@ angular.module('restaurant-reviewer')
 			});
 
 			vm.clearForm();
+			// focus on list of reviews to help screen reader to focus atention in what matters next
+			document.querySelector('h2.reviews-title').focus();
 		};
 
 		vm.clearForm = function() {
-			vm.newReview = {
-				rating: 3,
-				comment: ''
-			};
+			vm.newReview.rating = 3;
+			vm.newReview.comment = '';
 		};
 
 		// init
