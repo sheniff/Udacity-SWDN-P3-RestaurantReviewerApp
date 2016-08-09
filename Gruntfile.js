@@ -46,7 +46,8 @@ module.exports = function (grunt) {
 					'app/modules/**/*Route.js',
 					'app/modules/**/*Ctrl.js',
 					'app/modules/**/*Service.js',
-					'app/modules/**/*Directive.js'
+					'app/modules/**/*Directive.js',
+					'app/assets/js/templates.js'
 				],
 				dest: 'app/assets/js/<%= pkg.name %>-appbundle.js'
 			},
@@ -85,7 +86,11 @@ module.exports = function (grunt) {
 			},
 			base: {
 				src: ['<%= concat.base.dest %>'],
-				dest: 'app/assets/js/<%= pkg.name %>-angscript.min.js'
+				dest: 'app/assets/js/<%= pkg.name %>-app.min.js'
+			},
+			build: {
+				src: ['<%= concat.build.dest %>'],
+				dest: 'app/assets/js/<%= pkg.name %>-angular.min.js'
 			},
 			basePlugin: {
 				src: [ 'src/plugins/**/*.js' ],
@@ -148,9 +153,9 @@ module.exports = function (grunt) {
 				files: {
 					'index.html': [
 						'app/assets/css/**/*.css',
-						'app/assets/js/*.js'
+						'app/assets/js/restaurant-reviewer-angular.min.js',
+						'app/assets/js/restaurant-reviewer-app.min.js'
 					]
-
 				}
 			}
 		},
@@ -181,8 +186,9 @@ module.exports = function (grunt) {
 	grunt.registerTask("build", [
 		"jshint",
 		"exec",
-		"concat",
 		"ngtemplates",
+		"concat",
+		"uglify",
 		"injector:production",
 		"concurrent",
 		"clean"

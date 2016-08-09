@@ -1,7 +1,7 @@
 {
   "name": "restaurant-reviewer",
   "description": "Udacity - Senior Web Developer Nanodegree P3 - Restaurant reviewer",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "author": "Sheniff",
   "engines": {
     "node": "0.10.x",

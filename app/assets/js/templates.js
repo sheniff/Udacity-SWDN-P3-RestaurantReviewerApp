@@ -32,9 +32,7 @@ angular.module('restaurant-reviewer').run(['$templateCache', function($templateC
     "<md-content layout=\"row\" layout-wrap style=\"background-color:#DCDCDC\">\n" +
     "    <div flex=\"100\" flex-gt-xs=\"45\" layout=\"column\">\n" +
     "        <md-card>\n" +
-    "            <div style=\"height: 200px;overflow: hidden\">\n" +
-    "                <img style=\"transform: translateY(-220px)\" ng-src=\"{{ vm.restaurant.picture }}\" alt=\"{{ vm.restaurant.name }}\" class=\"md-card-image\">\n" +
-    "            </div>\n" +
+    "            <img ng-src=\"{{ vm.restaurant.picture }}\" alt=\"{{ vm.restaurant.name }}\" class=\"md-card-image\">\n" +
     "            <md-card-title>\n" +
     "              <md-card-title-text>\n" +
     "                <h2 class=\"md-headline\">{{ vm.restaurant.name }}</h2>\n" +
@@ -61,6 +59,14 @@ angular.module('restaurant-reviewer').run(['$templateCache', function($templateC
     "            <md-card-content>\n" +
     "\n" +
     "                <form name=\"reviewForm\" ng-submit=\"vm.saveReview(vm.newReview.rating, vm.newReview.comment)\" novalidate>\n" +
+    "                    <md-input-container class=\"md-block\" md-is-error=\"vm.reviewForm.$submitted && vm.reviewForm.name.$invalid\">\n" +
+    "                        <label>Name (required)</label>\n" +
+    "                        <input type=\"text\" name=\"name\" id=\"name\" ng-model=\"vm.newReview.name\" required/>\n" +
+    "                        <div ng-messages=\"vm.reviewForm.name.$error\" ng-if=\"vm.reviewForm.$submitted && vm.reviewForm.name.$invalid\">\n" +
+    "                          <p ng-message=\"required\">Name is required.</p>\n" +
+    "                        </div>\n" +
+    "                    </md-input-container>\n" +
+    "\n" +
     "                    <!-- ToDo: Reescribir este componente para escoger estrellitas :P (un selector sería lo mas facil) -->\n" +
     "                    <md-input-container class=\"md-block\">\n" +
     "                        <label>Rating</label>\n" +
@@ -90,7 +96,7 @@ angular.module('restaurant-reviewer').run(['$templateCache', function($templateC
     "\n" +
     "    <div flex=\"100\" flex-gt-xs=\"50\" layout=\"column\">\n" +
     "        <md-card flex>\n" +
-    "            <md-card-title>\n" +
+    "            <md-card-title style=\"flex-grow: 0.15\">\n" +
     "              <md-card-title-text>\n" +
     "                <h2 class=\"md-headline reviews-title\" tabindex=\"-1\">Reviews</h2>\n" +
     "              </md-card-title-text>\n" +
@@ -104,7 +110,7 @@ angular.module('restaurant-reviewer').run(['$templateCache', function($templateC
     "                                <div layout=\"column\">\n" +
     "                                    <h3>{{ review.reviewer }}</h3>\n" +
     "                                    <h4>\n" +
-    "                                    <span aria-label=\"Rating\" aria-value=\"{{review.rating}}\">\n" +
+    "                                    <span aria-label=\"Rating\">\n" +
     "                                        <ng-md-icon ng-repeat=\"a in vm.getNumber(review.rating) track by $index\" icon=\"star\"></ng-md-icon>\n" +
     "                                    </span>\n" +
     "                                    <small>{{ review.timestamp | date }}</small></h4>\n" +
@@ -160,7 +166,7 @@ angular.module('restaurant-reviewer').run(['$templateCache', function($templateC
     "    </aside>\n" +
     "</md-sidenav>\n" +
     "\n" +
-    "<div layout=\"column\" class=\"relative\" layout-fill role=\"main\" ng-controller=\"LayoutCtrl as layout\" ng-cloak>\n" +
+    "<div layout=\"column\" class=\"relative\" layout-fill ng-controller=\"LayoutCtrl as layout\" ng-cloak>\n" +
     "    <md-toolbar ng-show=\"!showSearch\">\n" +
     "        <header class=\"md-toolbar-tools\">\n" +
     "            <md-button ng-click=\"layout.toggleSidenav('left')\" hide-gt-md aria-label=\"Menu\">\n" +
