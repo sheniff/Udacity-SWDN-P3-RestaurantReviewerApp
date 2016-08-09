@@ -1,9 +1,7 @@
 <md-content layout="row" layout-wrap style="background-color:#DCDCDC">
     <div flex="100" flex-gt-xs="45" layout="column">
         <md-card>
-            <div style="height: 200px;overflow: hidden">
-                <img style="transform: translateY(-220px)" ng-src="{{ vm.restaurant.picture }}" alt="{{ vm.restaurant.name }}" class="md-card-image">
-            </div>
+            <img ng-src="{{ vm.restaurant.picture }}" alt="{{ vm.restaurant.name }}" class="md-card-image">
             <md-card-title>
               <md-card-title-text>
                 <h2 class="md-headline">{{ vm.restaurant.name }}</h2>
@@ -67,7 +65,7 @@
 
     <div flex="100" flex-gt-xs="50" layout="column">
         <md-card flex>
-            <md-card-title>
+            <md-card-title style="flex-grow: 0.15">
               <md-card-title-text>
                 <h2 class="md-headline reviews-title" tabindex="-1">Reviews</h2>
               </md-card-title-text>
